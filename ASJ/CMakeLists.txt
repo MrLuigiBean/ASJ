@@ -1,7 +1,7 @@
 ﻿# CMakeList.txt : CMake project for ASJs, include source and define
 # project specific logic here.
 #
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required (VERSION 3.20)
 
 # Enable Hot Reload for MSVC compilers if supported.
 if (POLICY CMP0141)
@@ -13,6 +13,10 @@ project ("ASJ")
 
 # Add source to this project's executable.
 add_executable (ASJ "main.cpp" )
+
+# Thank you https://stackoverflow.com/a/50306091/30412497 !
+set_target_properties(ASJ PROPERTIES
+	RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/Executable")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET ASJ PROPERTY CXX_STANDARD 20)
