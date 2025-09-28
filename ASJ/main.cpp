@@ -126,6 +126,14 @@ int main(int argc, char* argv[])
         }
     }
 
+    // if no options have been enabled, but there are still arguments, assume add mode.
+    if (optionsEnabled == 0 /* && argc > 1 */)
+    {
+        std::cout << "ASSUMING ADD MODE\n";
+        isAdding = true;
+        optionsEnabled = 1;
+    }
+
     if (isArgumentError || optionsEnabled != 1)
     {
         ShowUsage();
