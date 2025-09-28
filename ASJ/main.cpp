@@ -4,6 +4,8 @@
 
 #define PRINT(x) std::cout << #x << ": " << (x) << "\n"
 
+constexpr const char* listFilename = "ASJ_List.txt";
+
 static cag_option options[] =
 {
     {
@@ -56,6 +58,9 @@ static void AddFile(const char* filePath)
 {
     std::cout << "Adding ";
     PRINT(filePath);
+
+    std::fstream list(listFilename, std::ios_base::app);
+    list << filePath << "\n";
 }
 
 static void RemoveFile(const char* filePath)
@@ -66,19 +71,19 @@ static void RemoveFile(const char* filePath)
 
 static void SplitFiles()
 {
-    std::fstream list("ASJ_List.txt", std::ios_base::in);
+    std::fstream list(listFilename, std::ios_base::in);
     if (!list)
     {
-        std::cout << "WARNING: ASJ_List.txt not found. No files split.\n";
+        std::cout << "WARNING: " << listFilename << " not found. No files split.\n";
     }
 }
 
 static void JoinFiles()
 {
-    std::fstream list("ASJ_List.txt", std::ios_base::in);
+    std::fstream list(listFilename, std::ios_base::in);
     if (!list)
     {
-        std::cout << "WARNING: ASJ_List.txt not found. No files joined.\n";
+        std::cout << "WARNING: " << listFilename << " not found. No files joined.\n";
     }
 }
 
@@ -142,12 +147,13 @@ int main(int argc, char* argv[])
 
     for (int param_index = cag_option_get_index(&context); param_index < argc; ++param_index)
     {
+        const char* file = argv[param_index];
         if (isSplitting || isJoining)
-            printf("Ignoring additional parameter: %s\n", argv[param_index]);
+            printf("Ignoring additional parameter: %s\n", file);
         if (isAdding)
-            AddFile(argv[param_index]);
+            AddFile(file);
         if (isRemoving)
-            RemoveFile(argv[param_index]);
+            RemoveFile(file);
     }
 
     if (isSplitting)
