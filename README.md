@@ -21,6 +21,8 @@ Split files should be in a folder of their own, I feel. Just gotta remove the fo
 
 Put it on vcpkg and Unity Asset Store as well? So that other devs can used it?
 
+`cargs` on `vcpkg` seems like a simple, cross-platform way to manage command line arguements/options, despite all the stuff [below](#research--notes) :P
+
 ## Research (?) Notes
 - needs command line options
 - remember that an assignment had them
